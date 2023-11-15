@@ -1,7 +1,24 @@
 //This import statement messes with the jest testing
 // import './styles.css';
 
+class ship{
+    length;
+    hitCount = 0;
+    name;
+    sunk = false;
+    constructor(length, name){
+        this.length = length;
+        this.name = name;
+    }
+    hit = () =>this.hitCount++;
+    isSunk = () => {
+        if(this.hitCount >= this.length){
+            this.sunk = true
+        }
+        return this.sunk;
+        
+    }
+}
 
-const sum = (a,b) => a+b;
-module.exports = sum;
+module.exports = ship;
 
