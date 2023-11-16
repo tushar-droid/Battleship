@@ -28,3 +28,29 @@ test('check isSunk after multiple hits', () =>{
     obj.hit();
     expect(obj.isSunk()).toBe(true);
 })
+
+test('check the postion coordinates', () =>{
+    const obj = new ship(2, 'carrier', "2,3", "H");
+    expect(obj.taken_coords).toStrictEqual(["2,3", "3,3"]);
+})
+
+test('check the postion coordinates for different length', () =>{
+    const obj = new ship(4, 'carrier', "2,3", "H");
+    expect(obj.taken_coords).toStrictEqual(["2,3", "3,3", "4,3", "5,3"]);
+})
+
+test('check the postion coordinates for vertical ship', () =>{
+    const obj = new ship(2, 'carrier', "2,3", "V");
+    expect(obj.taken_coords).toStrictEqual(["2,3","2,4"]);
+})
+
+test('check the postion coordinates when placing out of bounds Horizontally', () =>{
+    const obj = new ship(4, 'carrier', "7,3", "H");
+    expect(obj.taken_coords).toStrictEqual([]);
+})
+
+test('check the postion coordinates when placing out of bounds Vertically', () =>{
+    const obj = new ship(4, 'carrier', "2,8", "V");
+    expect(obj.taken_coords).toStrictEqual([]);
+})
+
