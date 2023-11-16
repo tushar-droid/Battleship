@@ -1,4 +1,4 @@
-const ship = require('./index.js');
+const ship = require('./ship');
 
 test('check hit counter to be 0', () =>{
     const obj = new ship();
