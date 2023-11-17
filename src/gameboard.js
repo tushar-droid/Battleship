@@ -16,12 +16,15 @@ class Gameboard{
         }
     };
 
-    placeShips = () =>{
+    placeShips = (coords = '0,0', orientations = 'V') =>{
         //if needed we can also make the ship object here and then get the coordinates for its placement using obj.taken_coords;
-        const new_ship = new Ship(4,'carrier', '0,0','V');
+        const new_ship = new Ship(4,'carrier', coords,orientations);
         const coordinates = new_ship.taken_coords;
         coordinates.forEach(coord =>{
-            this.Board.set(coord, new_ship);
+            if(!(this.Board.get(coord) instanceof Object)){
+                this.Board.set(coord, new_ship);
+            }
+            else return false;
         });
     }
 
