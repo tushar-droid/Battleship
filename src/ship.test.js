@@ -53,4 +53,3 @@ test('check the postion coordinates when placing out of bounds Vertically', () =
     const obj = new ship(4, 'carrier', "2,8", "V");
     expect(obj.taken_coords).toStrictEqual([]);
 })
-

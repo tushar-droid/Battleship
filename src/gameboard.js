@@ -6,7 +6,8 @@ const Ship = require('./ship');
 /// first element tells the X position and second element tells the Y position
 
 class Gameboard{
-    Board = new Map(); 
+    Board = new Map();
+    isGameOver = false;
     constructor(){
         for(var i = 0; i<10; i++){
             for(var j = 0; j<10; j++){
@@ -40,7 +41,6 @@ class Gameboard{
             //check if all ships sunk        
             
             this.areAllSunk();
-            
             //start here
 
 
@@ -52,12 +52,17 @@ class Gameboard{
     }
 
     areAllSunk = () =>{
-
         //todo
-
-
+        var flag = true;
+        const values = [...this.Board.values()];
+        values.forEach(val =>{
+            if( val instanceof Object){
+                flag = false;
+            }
+        })
+        this.isGameOver = true;
+        return flag;
     }
-
 }
 const gm = new Gameboard();
 
