@@ -45,8 +45,6 @@ class Gameboard{
             
             this.areAllSunk();
             //start here
-
-
         }
         else{
             //It hit the water so change it to a hit to make sure it is not hittable again
