@@ -1,6 +1,5 @@
 const Ship = require('./ship');
-
-
+const prompt = require("prompt-sync")({ sigint: true });
 /// coordinates willl be as follows: 
 /// (0,0) corresponds to the bottom left corner
 /// first element tells the X position and second element tells the Y position
@@ -16,9 +15,9 @@ class Gameboard{
         }
     };
 
-    placeShips = (coords = '0,0', orientations = 'V') =>{
+    placeShips = (coords = '0,0', orientations = 'V',size) =>{
         //if needed we can also make the ship object here and then get the coordinates for its placement using obj.taken_coords;
-        const new_ship = new Ship(4,'carrier', coords,orientations);
+        const new_ship = new Ship(size,ship_name ='carrier', coords,orientations);
         const coordinates = new_ship.taken_coords;
         coordinates.forEach(coord =>{
             if(!(this.Board.get(coord) instanceof Object)){
@@ -26,6 +25,7 @@ class Gameboard{
             }
             else return false;
         });
+        return true;
     }
 
     receiveAttack = (hit_coordinates_string) =>{

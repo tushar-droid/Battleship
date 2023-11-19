@@ -1,9 +1,10 @@
+
 const Gameboard = require('./gameboard');
 const Ship = require('./ship');
 class Player {
     yourTurn = (computer_board) =>{
-        const plays = ['1,8', '1,9', '2,0'];
-        computer_board.receiveAttack(plays[1]);
+        const val = prompt('INPUT YOUR MOVE:  ')
+        computer_board.receiveAttack(val);
     }
     computerTurn = (player_board) =>{
         const possible_plays = 
@@ -21,7 +22,7 @@ class Player {
             '8,0', '8,1', '8,2', '8,3', '8,4', '8,5', '8,6', '8,7',
             '8,8', '8,9', '9,0', '9,1', '9,2', '9,3', '9,4', '9,5',
             '9,6', '9,7', '9,8', '9,9'
-            ];
+        ];
         
         player_board.receiveAttack("4,8"); 
 
