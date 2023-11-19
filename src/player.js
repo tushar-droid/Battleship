@@ -1,6 +1,8 @@
 
 const Gameboard = require('./gameboard');
 const Ship = require('./ship');
+const prompt = require("prompt-sync")({ sigint: true });
+
 class Player {
     yourTurn = (computer_board) =>{
         const val = prompt('INPUT YOUR MOVE:  ')
@@ -23,9 +25,10 @@ class Player {
             '8,8', '8,9', '9,0', '9,1', '9,2', '9,3', '9,4', '9,5',
             '9,6', '9,7', '9,8', '9,9'
         ];
-        
-        player_board.receiveAttack("4,8"); 
-
+        var coord_to_attack = Math.floor(Math.random() * possible_plays.length);
+        coord_to_attack = possible_plays.splice(coord_to_attack,1);
+        player_board.receiveAttack(coord_to_attack); 
+        console.log('COMPUTER PLAYED ON: ', coord_to_attack)
     }
 
 }

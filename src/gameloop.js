@@ -13,11 +13,15 @@ const gameLoop = () =>{
     while(!(PLAYER_BOARD.areAllSunk() || COMPUTER_BOARD.areAllSunk())){
         if(player_turn){
             PLAYER_ONE.yourTurn(COMPUTER_BOARD);
+            player_turn = false;
         }
         else{
             COMP_PLAYER.computerTurn(PLAYER_BOARD);
+            player_turn = true;
         }
     }
+    if(PLAYER_BOARD.areAllSunk())   console.log('COMPUTER WON!!')
+    if(COMPUTER_BOARD.areAllSunk())   console.log('YOU WON!!')
 }
 
 
@@ -40,7 +44,8 @@ const placeShipsLoop = (board_to_set) =>{
     while(i<4){
         var coord_to_put = Math.floor(Math.random() * possible_places.length);
         coord_to_put = possible_places.splice(coord_to_put, 1);
-        if(board_to_set.placeShips(size_array[i],'boat',coord_to_put,Math.random() < 0.5 ? 'H' : 'V' )) i+=1;
+        if(board_to_set.placeShips(String(coord_to_put),Math.random() < 0.5 ? 'H' : 'V', size_array[i] )) i+=1;
     }
 }
 
+gameLoop();
