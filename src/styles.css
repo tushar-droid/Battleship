@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'Anton';
+    src: url('../src/assets/Anton-Regular.ttf') ;
+}
+
+
+
+:root{
+    --backdrop: #001d3d;
+    --backgrnd:#003566;
+    --txt: #ffd60a;
+}
+
+
+body{
+    background-color: var(--backdrop);
+    margin:0;
+    padding: 0;
+    height: 100vh;
+    width:100vw;
+    color: var(--txt);
+    font-family: 'Anton';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-container{
+    height: 70%;
+    width: 60%;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    background-color: var(--backgrnd);
+}
+
+.game-container > div{
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comp-side{
+    padding: 1%;
+    background-color: var(--backdrop);
+    height: 60%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}   
+.player-side{
+    padding: 1%;
+    display: flex;
+    height: 60%;
+    width: 70%;
+    background-color: var(--backdrop);
+    align-items: center;
+    flex-direction: column;
+    gap:2%;
+
+}
+
+
+.grid-elem{
+    background-color: var(--backgrnd);
+    border-radius: 10%;
+}
+
+.player-grid, .comp-grid{
+    padding-top: 4%;
+    height: 80%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+    grid-template-rows: repeat(10,1fr);
+    gap:1%;
+}
