@@ -5,7 +5,6 @@ class Ship{
     taken_coords = [];
     sunk = false;
     constructor(length =0, name='carrier', coords = '0,0', direction = 'H'){
-        console.log(coords)
         this.length = length;
         this.name = name;
         const coords_arr = coords.split(',');

@@ -1,11 +1,11 @@
 
 const Gameboard = require('./gameboard');
 const Ship = require('./ship');
-const prompt = require("prompt-sync")({ sigint: true });
+// const prompt = require("prompt-sync")({ sigint: true });
 
 class Player {
     yourTurn = (computer_board) =>{
-        const val = prompt('INPUT YOUR MOVE:  ')
+        // const val = prompt('INPUT YOUR MOVE:  ')
         computer_board.receiveAttack(val);
     }
     computerTurn = (player_board) =>{

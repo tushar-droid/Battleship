@@ -1,5 +1,5 @@
 const Ship = require('./ship');
-const prompt = require("prompt-sync")({ sigint: true });
+// const prompt = require("prompt-sync")({ sigint: true });
 /// coordinates willl be as follows: 
 /// (0,0) corresponds to the bottom left corner
 /// first element tells the X position and second element tells the Y position
@@ -65,7 +65,7 @@ class Gameboard{
         return flag;
     }
 }
-const gm = new Gameboard();
+//const gm = new Gameboard();
 
 
 module.exports = Gameboard;
