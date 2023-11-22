@@ -69,7 +69,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
 }
 .comp-grid > .grid-elem:hover{
     background-color: yellowgreen;

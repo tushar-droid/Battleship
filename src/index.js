@@ -17,7 +17,7 @@ class gameScreen{
         const comp_brd = gm_loop.COMPUTER_BOARD.Board;
  
         console.log('This is board: ', pl_brd);
-        console.log('This is board: ', pl_brd);
+
 
 
         const player_grid = this.#PlayerSideUI(pl_brd);
@@ -36,7 +36,7 @@ class gameScreen{
         const comp_title = this.#CreateAndSetClassName('div', 'h3');
         comp_title.textContent = 'COMPUTER SIDE';
         const grid_container = this.#CreateAndSetClassName('div', 'comp-grid');
-        this.#createGrid(grid_container, comp_brd);
+        this.#createGrid(grid_container, comp_brd, false);
 
 
         comp_side.appendChild(comp_title)
@@ -50,16 +50,16 @@ class gameScreen{
         player_title.textContent = 'PLAYER SIDE';
 
         const grid_container = this.#CreateAndSetClassName('div', 'player-grid');
-        this.#createGrid(grid_container, pl_brd);
+        this.#createGrid(grid_container, pl_brd,true);
         player_side.appendChild(player_title);
         player_side.appendChild(grid_container);
         return player_side;
     }
-    #createGrid(container, brd){ 
+    #createGrid(container, brd, isPlayer){ 
         for(let i = 0; i<10; i++){
             for(let j = 0; j<10; j++){
                 const grid_elem = this.#CreateAndSetClassName('div','grid-elem' ,`${i},${j}`);
-                if(brd.get(`${i},${j}`) instanceof Object)  
+                if(brd.get(`${i},${j}`) instanceof Object && isPlayer)  
                 {   grid_elem.classList.add('ship-coord');
                     grid_elem.textContent = 'S';
                     }

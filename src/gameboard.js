@@ -17,6 +17,40 @@ class Gameboard{
 
     placeShips = (coords = '0,0', orientations = 'V',size) =>{
         //if needed we can also make the ship object here and then get the coordinates for its placement using obj.taken_coords;
+        const requested_coords = [];
+        const coords_arr = coords.split(',');
+        const X_val = parseInt(coords_arr[0]);
+        const Y_val = parseInt(coords_arr[1]); 
+        if(orientations ==='H'){
+            requested_coords.push(`${X_val-1},${Y_val}`);
+            requested_coords.push(`${X_val+size},${Y_val}`)
+        }
+        else if(orientations ==='V'){
+            requested_coords.push(`${X_val},${Y_val-1}`);
+            requested_coords.push(`${X_val},${Y_val+size}`)
+        }
+        for(let i =0; i<size;i++){
+            if(orientations ==='H')
+            {   requested_coords.push(`${X_val+i},${Y_val}`)
+                requested_coords.push(`${X_val},${Y_val-1}`)
+                requested_coords.push(`${X_val},${Y_val+1}`)
+                }
+            else    
+            {   requested_coords.push(`${X_val},${Y_val+i}`)
+                requested_coords.push(`${X_val-1},${Y_val}`)
+                requested_coords.push(`${X_val+1},${Y_val}`)             
+            }
+        }
+
+        requested_coords.forEach(coord => {
+            if(this.Board.has(coord))
+                {
+                    return false;
+                }
+        });
+
+
+        //check expected coordinates to make sure the ships won't overlap
         const new_ship = new Ship(size,'carrier', coords,orientations);
         const coordinates = new_ship.taken_coords;
         coordinates.forEach(coord =>{
