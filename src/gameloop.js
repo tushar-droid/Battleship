@@ -14,7 +14,7 @@ class GameLoop{
         console.log('Gameloop was started')
         this.placeShipsLoop(this.PLAYER_BOARD)
         this.placeShipsLoop(this.COMPUTER_BOARD)
-
+        console.log(this.PLAYER_BOARD)
         //playGame(PLAYER_ONE, COMP_PLAYER, PLAYER_BOARD, COMPUTER_BOARD);
     }
 
@@ -52,7 +52,8 @@ class GameLoop{
         while(i<4){
             var coord_to_put = Math.floor(Math.random() * possible_places.length);
             coord_to_put = possible_places.splice(coord_to_put, 1);
-            if(board_to_set.placeShips(String(coord_to_put),Math.random() < 0.5 ? 'H' : 'V', size_array[i] )) i+=1;
+            const chk =board_to_set.placeShips(String(coord_to_put),Math.random() < 0.5 ? 'H' : 'V', size_array[i] );
+            if(chk) i+=1;
         }
     }
     

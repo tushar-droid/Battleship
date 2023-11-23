@@ -58,7 +58,7 @@ class gameScreen{
     #createGrid(container, brd, isPlayer){ 
         for(let i = 0; i<10; i++){
             for(let j = 0; j<10; j++){
-                const grid_elem = this.#CreateAndSetClassName('div','grid-elem' ,`${i},${j}`);
+                const grid_elem = this.#CreateAndSetClassName('div','grid-elem' ,`${j},${i}`);
                 if(brd.get(`${i},${j}`) instanceof Object && isPlayer)  
                 {   grid_elem.classList.add('ship-coord');
                     grid_elem.textContent = 'S';
