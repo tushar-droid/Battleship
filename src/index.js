@@ -28,6 +28,10 @@ class gameScreen{
         main_container.appendChild(left_side);
         main_container.appendChild(right_side);
 
+
+        gm_loop.playGame();
+
+
     }
 
     #ComputerSideUI(comp_brd){
@@ -82,9 +86,13 @@ class gameScreen{
         return container;
     }
 
-}
 
+
+
+
+}
 
 
 const game = new gameScreen();
 game.CreatePage();
+

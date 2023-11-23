@@ -1,36 +1,53 @@
 const Player = require('./player');
 const Gameboard = require('./gameboard');
-let player_turn = true;
+
 
 
 class GameLoop{
-
+    player_turn = true;
     PLAYER_ONE = new Player();
     COMP_PLAYER = new Player();
     PLAYER_BOARD = new Gameboard();
     COMPUTER_BOARD = new Gameboard();
-
     gameLoop = () =>{
-        console.log('Gameloop was started')
         this.placeShipsLoop(this.PLAYER_BOARD)
         this.placeShipsLoop(this.COMPUTER_BOARD)
         console.log(this.PLAYER_BOARD)
+        console.log('PLAYER ONE: ', this.PLAYER_ONE)
         //playGame(PLAYER_ONE, COMP_PLAYER, PLAYER_BOARD, COMPUTER_BOARD);
     }
 
-    playGame = (PLAYER_ONE, COMP_PLAYER, PLAYER_BOARD, COMPUTER_BOARD) =>{
-        while(!(PLAYER_BOARD.areAllSunk() || COMPUTER_BOARD.areAllSunk())){
-            if(player_turn){
-                PLAYER_ONE.yourTurn(COMPUTER_BOARD);
-                player_turn = false;
-            }
-            else{
-                COMP_PLAYER.computerTurn(PLAYER_BOARD);
-                player_turn = true;
-            }
-        }
-        if(PLAYER_BOARD.areAllSunk())   console.log('COMPUTER WON!!')
-        if(COMPUTER_BOARD.areAllSunk())   console.log('YOU WON!!')
+    playGame = () =>{
+        const computer_grid_click_handler = document.querySelector('.comp-grid');
+
+        computer_grid_click_handler.addEventListener('click', e =>{
+            console.log('The function says: ', e)
+            let attack_on = e.target.id;
+            this.PLAYER_ONE.yourTurn(this.COMPUTER_BOARD, attack_on)
+            this.COMP_PLAYER.computerTurn(this.PLAYER_BOARD);
+            console.log('PLAYER BOARD: ',this.PLAYER_BOARD)
+            console.log('COMPUTER BOARD: ', this.COMPUTER_BOARD)
+        })
+
+
+
+        // computer_grid_click_handler.addEventListener('click',this.PlayerAttackHandler);
+        
+        // while(!(this.PLAYER_BOARD.areAllSunk() || this.COMPUTER_BOARD.areAllSunk())){
+        //     if(this.player_turn){
+        //         this.PLAYER_ONE.yourTurn(this.COMPUTER_BOARD, attack_on);
+        //         this.player_turn = false;
+        //     }
+        //     else{
+        //         this.COMP_PLAYER.computerTurn(this.PLAYER_BOARD);
+        //         this.player_turn = true;
+        //     }
+        // }
+        // if(this.PLAYER_BOARD.areAllSunk())   console.log('COMPUTER WON!!')
+        // if(this.COMPUTER_BOARD.areAllSunk())   console.log('YOU WON!!')
+    
+    
+    
     }
 
     placeShipsLoop = (board_to_set) =>{
@@ -57,6 +74,13 @@ class GameLoop{
         }
     }
     
+    PlayerAttackHandler(event){
+        console.log('The function says: ', event)
+        let attack_on = event.target.id;
+        //this.PLAYER_ONE.yourTurn(this.COMPUTER_BOARD, attack_on)
+        // this.PLAYER_ONE.yourTurn(this.COMPUTER_BOARD, attack_on);
+        this.COMP_PLAYER.computerTurn(this.PLAYER_BOARD);
+    }
 
 
 }
