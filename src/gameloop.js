@@ -11,22 +11,30 @@ class GameLoop{
     COMPUTER_BOARD = new Gameboard();
     gameLoop = () =>{
         this.placeShipsLoop(this.PLAYER_BOARD)
-        this.placeShipsLoop(this.COMPUTER_BOARD)
-        console.log(this.PLAYER_BOARD)
-        console.log('PLAYER ONE: ', this.PLAYER_ONE)
+        this.placeShipsLoop(this.COMPUTER_BOARD)  
         //playGame(PLAYER_ONE, COMP_PLAYER, PLAYER_BOARD, COMPUTER_BOARD);
+        console.log('This is the player board: ', this.PLAYER_BOARD.Board)
     }
 
     playGame = () =>{
         const computer_grid_click_handler = document.querySelector('.comp-grid');
 
         computer_grid_click_handler.addEventListener('click', e =>{
-            console.log('The function says: ', e)
-            let attack_on = e.target.id;
-            this.PLAYER_ONE.yourTurn(this.COMPUTER_BOARD, attack_on)
-            this.COMP_PLAYER.computerTurn(this.PLAYER_BOARD);
-            console.log('PLAYER BOARD: ',this.PLAYER_BOARD)
-            console.log('COMPUTER BOARD: ', this.COMPUTER_BOARD)
+            let attack_on = e.target.getAttribute('coords');
+
+            
+            if(attack_on){
+                const elem = document.getElementById(`C${attack_on}`)
+
+
+                if(this.PLAYER_ONE.yourTurn(this.COMPUTER_BOARD, attack_on, elem))
+                    window.alert('CONGRATULATIONS YOU WON!!!!!')
+                
+                
+                if(this.COMP_PLAYER.computerTurn(this.PLAYER_BOARD))
+                    window.alert('WELL PLAYED BUT COMPUTER WON!!!!!');
+            }
+
         })
 
 
@@ -74,15 +82,6 @@ class GameLoop{
         }
     }
     
-    PlayerAttackHandler(event){
-        console.log('The function says: ', event)
-        let attack_on = event.target.id;
-        //this.PLAYER_ONE.yourTurn(this.COMPUTER_BOARD, attack_on)
-        // this.PLAYER_ONE.yourTurn(this.COMPUTER_BOARD, attack_on);
-        this.COMP_PLAYER.computerTurn(this.PLAYER_BOARD);
-    }
-
-
 }
 
 

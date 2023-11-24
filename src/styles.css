@@ -9,6 +9,7 @@
     --backdrop: #001d3d;
     --backgrnd:#003566;
     --txt: #ffd60a;
+    --hit: 	#ff5a00;
 }
 
 
@@ -89,3 +90,10 @@ body{
     background-color: black;
 }
 
+.missed{
+    background-color: var(--txt);
+}
+
+.hit{
+    background-color: var(--hit);
+}

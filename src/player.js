@@ -4,9 +4,9 @@ const Ship = require('./ship');
 // const prompt = require("prompt-sync")({ sigint: true });
 
 class Player {
-    yourTurn = (computer_board, val) =>{
+    yourTurn = (computer_board, val, elem) =>{
         // const val = prompt('INPUT YOUR MOVE:  ')
-        computer_board.receiveAttack(val);
+        return computer_board.receiveAttack(val, elem);
     }
     computerTurn = (player_board) =>{
         const possible_plays = 
@@ -27,8 +27,8 @@ class Player {
         ];
         var coord_to_attack = Math.floor(Math.random() * possible_plays.length);
         coord_to_attack = possible_plays.splice(coord_to_attack,1);
-        player_board.receiveAttack(String(coord_to_attack)); 
-        console.log('COMPUTER PLAYED ON: ', coord_to_attack)
+        const elem = document.getElementById(`P${coord_to_attack}`)
+        return player_board.receiveAttack(String(coord_to_attack), elem); 
     }
 
 }

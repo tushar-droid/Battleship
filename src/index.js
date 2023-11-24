@@ -16,8 +16,6 @@ class gameScreen{
         const pl_brd = gm_loop.PLAYER_BOARD.Board
         const comp_brd = gm_loop.COMPUTER_BOARD.Board;
  
-        console.log('This is board: ', pl_brd);
-
 
 
         const player_grid = this.#PlayerSideUI(pl_brd);
@@ -60,10 +58,10 @@ class gameScreen{
         return player_side;
     }
     #createGrid(container, brd, isPlayer){ 
-        for(let i = 0; i<10; i++){
+        for(let i = 9; i>=0; i--){
             for(let j = 0; j<10; j++){
-                const grid_elem = this.#CreateAndSetClassName('div','grid-elem' ,`${j},${i}`);
-                if(brd.get(`${i},${j}`) instanceof Object && isPlayer)  
+                const grid_elem = this.#CreateAndSetClassName('div','grid-elem' ,isPlayer?`P${j},${i}`:`C${j},${i}`,`${j},${i}`);
+                if(brd.get(`${j},${i}`) instanceof Object /*&& isPlayer*/)          //REMEMBER TO UNCOMMENT THIS  
                 {   grid_elem.classList.add('ship-coord');
                     grid_elem.textContent = 'S';
                     }
@@ -77,12 +75,13 @@ class gameScreen{
 
 
 
-    #CreateAndSetClassName(type, name, id){
+    #CreateAndSetClassName(type, name, id, data){
         const container = document.createElement(type);
         container.classList.add(name);
         if(id){
             container.id = id;
         }
+        if(data) container.setAttribute('coords', data)
         return container;
     }
 

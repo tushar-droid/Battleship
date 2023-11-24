@@ -69,41 +69,46 @@ class Gameboard{
         return true;
     }
 
-    receiveAttack = (hit_coordinates_string) =>{
+    receiveAttack = (hit_coordinates_string, DOM_elem) =>{
         //will recieve the attacks and decide if the ship is hit or not
         // const hit_coordinates_arr = hit_coordinates_string.split(',');    //I am assuming the coordinates come as string like "2,3" or else we can use this
         // X_coordinates = hit_coordinates_arr[0];
         // Y_coordinates = hit_coordinates_arr[1];
-        
+
+
+
         if(this.Board.get(hit_coordinates_string) instanceof Object){
             //it is a hit
             //call hit function in ship;
             const hit_ship = this.Board.get(hit_coordinates_string);
             hit_ship.hit();
             //check if the ship is sunk
-            this.Board.set(hit_coordinates_string, 'H');    
-            //check if all ships sunk        
+            this.Board.set(hit_coordinates_string, 'H');   
+            //change the color of the DOM elem
             
+            DOM_elem.classList.add('hit')
+
+            //check if all ships sunk        
             this.areAllSunk();
             //start here
+            return this.isGameOver;
         }
         else{
             //It hit the water so change it to a hit to make sure it is not hittable again
             this.Board.set(hit_coordinates_string, 'H'); 
+            
+            DOM_elem.classList.add('missed')
         }
     }
 
     areAllSunk = () =>{
         //todo
-        var flag = true;
         const values = [...this.Board.values()];
-        values.forEach(val =>{
-            if( val instanceof Object){
-                flag = false;
-            }
-        })
+        for(var i = 0; i<values.length; i++){
+            if(values[i] instanceof Object)
+                return
+        }
         this.isGameOver = true;
-        return flag;
     }
 }
 //const gm = new Gameboard();
