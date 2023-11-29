@@ -27,7 +27,7 @@ class gameScreen{
         main_container.appendChild(right_side);
 
 
-        gm_loop.playGame();
+        console.log(gm_loop.playGame());
 
 
     }
@@ -61,7 +61,7 @@ class gameScreen{
         for(let i = 9; i>=0; i--){
             for(let j = 0; j<10; j++){
                 const grid_elem = this.#CreateAndSetClassName('div','grid-elem' ,isPlayer?`P${j},${i}`:`C${j},${i}`,`${j},${i}`);
-                if(brd.get(`${j},${i}`) instanceof Object /*&& isPlayer*/)          //REMEMBER TO UNCOMMENT THIS  
+                if(brd.get(`${j},${i}`) instanceof Object  && isPlayer)          //REMEMBER TO UNCOMMENT THIS  
                 {   grid_elem.classList.add('ship-coord');
                     grid_elem.textContent = 'S';
                     }

@@ -1,8 +1,6 @@
 const Player = require('./player');
 const Gameboard = require('./gameboard');
-
-
-
+const GameOver = require('./GameOver');
 class GameLoop{
     player_turn = true;
     PLAYER_ONE = new Player();
@@ -18,23 +16,20 @@ class GameLoop{
 
     playGame = () =>{
         const computer_grid_click_handler = document.querySelector('.comp-grid');
-
         computer_grid_click_handler.addEventListener('click', e =>{
             let attack_on = e.target.getAttribute('coords');
 
             
-            if(attack_on){
+            if(attack_on && this.COMPUTER_BOARD.Board.get(attack_on)!=='H'){
                 const elem = document.getElementById(`C${attack_on}`)
-
-
-                if(this.PLAYER_ONE.yourTurn(this.COMPUTER_BOARD, attack_on, elem))
-                    window.alert('CONGRATULATIONS YOU WON!!!!!')
-                
-                
+                if(this.PLAYER_ONE.yourTurn(this.COMPUTER_BOARD, attack_on, elem)){
+                    GameOver('CONGRATULATIONS YOU WON!!!!!')
+                    return
+                    //window.alert('CONGRATULATIONS YOU WON!!!!!')
+                }
                 if(this.COMP_PLAYER.computerTurn(this.PLAYER_BOARD))
                     window.alert('WELL PLAYED BUT COMPUTER WON!!!!!');
             }
-
         })
 
 
