@@ -10,8 +10,10 @@ class UserPlaceShips {
         const main_container = this.#CreateAndSetClassName('div', 'set-ships');
         const heading = this.#CreateAndSetClassName('h2', 'placeships-heading')
         const empty_grid_container = this.#CreateAndSetClassName('div', 'empty-grid-container');
+        const right_side = this.#CreateAndSetClassName('div', 'right-side');
         const grid = this.#CreateAndSetClassName('div', 'ships-grid')
-        const orientation_switch_container = this.#CreateAndSetClassName('switcher');
+        const orientation_switch_container = this.#CreateAndSetClassName('div','switcher');
+        
         let elem = document.createElement('h3');
         elem.textContent = 'H'
         elem.style = 'margin: 2%';
@@ -28,11 +30,17 @@ class UserPlaceShips {
         this.#createGrid(grid)
         heading.textContent = 'PLACE YOUR SHIPS';
         empty_grid_container.appendChild(grid)
+        const instructions = document.createElement('p');
+        instructions.classList.add('instructions');
+        instructions.textContent = 'YOU HAVE A TOTAL OF 4 SHIPS OF SIZE 2,3,4,4 PLACE YOUR SHIPS STRATEGICALLY I MIGHT BE GOOD AT THIS LOGIC';
+        right_side.appendChild(instructions)
 
-        
+
         game_container.appendChild(heading);
         main_container.appendChild(empty_grid_container);
-        main_container.appendChild(orientation_switch_container)
+        right_side.appendChild(orientation_switch_container)
+        main_container.appendChild(right_side)
+        // main_container.appendChild(orientation_switch_container)
         game_container.appendChild(main_container);
 
 
@@ -42,8 +50,6 @@ class UserPlaceShips {
 
         document.addEventListener('mouseover', (e) =>{
             if(e.target.matches('.grid-elem')){
-                console.log(CURRENT_ORIENTATION)
-                console.log(e.target.getAttribute('coord'))
                 this.#preview(CURRENT_ORIENTATION, e.target)
             }
         })
@@ -78,9 +84,8 @@ class UserPlaceShips {
 
     #preview(orientation, target_elem){
         const START_ELEM = target_elem;
-        let size = 2;
+        let size = 4
         let [x,,y] = target_elem.getAttribute('coord')
-        console.log('y: ', y);
         let all_elems = [target_elem];
         if(orientation ==='H' && x<=10-size){
             target_elem.classList.add('possible_ship')
@@ -89,32 +94,40 @@ class UserPlaceShips {
                 target_elem = target_elem.nextSibling;
                 all_elems.push(target_elem);
             }
-            
+
         }
         else if(orientation ==='V' && y>=size-1){
             target_elem.classList.add('possible_ship');
             for(let i = 1; i<size; i++){
-                console.log('ID', `${x},${y+i}`)
                 let elem = document.getElementById(`${x},${parseInt(y)-i}`);
                 elem.classList.add('possible_ship');
                 all_elems.push(elem)
             }
 
+
+
         }
+        START_ELEM.addEventListener('click', (event) =>{
+            if((orientation ==='H' && x<=10-size) || (orientation ==='V' && y>=size-1)){
+                all_elems.forEach(element => {
+                    element.classList.add('ship-coord')
+                });
+            }
+        })
+
+
+
 
         START_ELEM.addEventListener('mouseleave', () =>{
-            console.log('This worked ')
             all_elems.forEach(elem => {  
                 elem.classList.remove('possible_ship')
             });
+            all_elems = [];
         });
 
 
- 
-
-
-        
        }
+
 
 
 

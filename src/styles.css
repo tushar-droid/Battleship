@@ -87,7 +87,7 @@ body{
 }
 
 .ship-coord{
-    background-color: black;
+    background-color: black !important;
 }
 
 .missed{
@@ -177,8 +177,24 @@ body{
   }
 /* Swtich ends here */
 
+.switcher{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+}
+
 
 
 .possible_ship{
     opacity: 0.5;
+}
+
+.right-side{
+    display: flex;
+    flex-direction: column;
+    gap:20%;
+}
+.instructions{
+    text-align: center;
 }
