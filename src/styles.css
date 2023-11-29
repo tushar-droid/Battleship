@@ -70,13 +70,13 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-
+    cursor: pointer;
 }
 .comp-grid > .grid-elem:hover{
     background-color: yellowgreen;
 }
 
-.player-grid, .comp-grid{
+.player-grid, .comp-grid, .ships-grid{
     padding-top: 4%;
     height: 80%;
     width: 80%;
@@ -96,4 +96,89 @@ body{
 
 .hit{
     background-color: var(--hit);
+}
+.set-ships{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.set-ships > *{
+    flex:1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ships-grid  > .grid-elem{
+    background-color: var(--backdrop);
+    border-radius: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* This is for the slider taken from  https://uiverse.io/YaroslavFilipenko/red-turtle-90 */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 20px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #b1b9c3;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: '';
+    height: 30px;
+    width: 30px;
+    bottom: -5px;
+    background: var(--backdrop);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+  input:checked+.slider {
+    background-color: #b1b9c3;
+  }
+  
+  input:checked+.slider:before {
+    -webkit-transform: translateX(35px);
+    -ms-transform: translateX(35px);
+    transform: translateX(35px);
+    background: var(--txt);
+  }
+/* Swtich ends here */
+
+
+
+.possible_ship{
+    opacity: 0.5;
 }

@@ -1,5 +1,5 @@
 //This import statement messes with the jest testing
-import './styles.css';
+//import './styles.css';
 const GameLoop = require('./gameloop')
 
 
@@ -9,7 +9,8 @@ class gameScreen{
         const main_container = document.querySelector('.game-container');
         const left_side = this.#CreateAndSetClassName('div', 'left-side')
         const right_side = this.#CreateAndSetClassName('div', 'right-side');
-
+        main_container.style = '';                              //removes all the styling applied by the player_ships.js
+        main_container.innerHTML = '';                          //removes elements from player_ships.js
         const gm_loop = new GameLoop();
         gm_loop.gameLoop();
 
@@ -61,7 +62,7 @@ class gameScreen{
         for(let i = 9; i>=0; i--){
             for(let j = 0; j<10; j++){
                 const grid_elem = this.#CreateAndSetClassName('div','grid-elem' ,isPlayer?`P${j},${i}`:`C${j},${i}`,`${j},${i}`);
-                if(brd.get(`${j},${i}`) instanceof Object  && isPlayer)          //REMEMBER TO UNCOMMENT THIS  
+                if(brd.get(`${j},${i}`) instanceof Object /* && isPlayer */)          //REMEMBER TO UNCOMMENT THIS  
                 {   grid_elem.classList.add('ship-coord');
                     grid_elem.textContent = 'S';
                     }
@@ -85,13 +86,10 @@ class gameScreen{
         return container;
     }
 
-
-
-
-
 }
 
 
-const game = new gameScreen();
-game.CreatePage();
+// const game = new gameScreen();
+// game.CreatePage();
 
+module.exports = gameScreen;
