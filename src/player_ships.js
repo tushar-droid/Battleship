@@ -2,6 +2,9 @@ import './styles.css';
 const gameScreen = require('./index');
 
 class UserPlaceShips {
+    under_preview = [];
+    sizes = [2,3,4,4];
+    ind = 0;
     shipPlacementUI = () =>{
         const game_container = document.querySelector('.game-container'); 
         game_container.style = 'flex-direction:column; align-items:center;'
@@ -13,7 +16,8 @@ class UserPlaceShips {
         const right_side = this.#CreateAndSetClassName('div', 'right-side');
         const grid = this.#CreateAndSetClassName('div', 'ships-grid')
         const orientation_switch_container = this.#CreateAndSetClassName('div','switcher');
-        
+        const play_game = this.#CreateAndSetClassName('button', 'start-game');
+
         let elem = document.createElement('h3');
         elem.textContent = 'H'
         elem.style = 'margin: 2%';
@@ -25,6 +29,10 @@ class UserPlaceShips {
         elem = document.createElement('h3');
         elem.style = 'margin: 2%';
         elem.textContent = 'V'
+        play_game.textContent = 'START';
+
+
+
         orientation_switch_container.appendChild(elem)
 
         this.#createGrid(grid)
@@ -40,19 +48,37 @@ class UserPlaceShips {
         main_container.appendChild(empty_grid_container);
         right_side.appendChild(orientation_switch_container)
         main_container.appendChild(right_side)
-        // main_container.appendChild(orientation_switch_container)
         game_container.appendChild(main_container);
-
-
-
+        game_container.appendChild(play_game)
         
         document.querySelector('.orientation').addEventListener('change', e => e.target.checked ? CURRENT_ORIENTATION = 'V': CURRENT_ORIENTATION = 'H')
 
-        document.addEventListener('mouseover', (e) =>{
-            if(e.target.matches('.grid-elem')){
-                this.#preview(CURRENT_ORIENTATION, e.target)
+        document.addEventListener('mouseover', e =>{       
+            if(e.target.classList.value ==='grid-elem') this.Preview(e.target, CURRENT_ORIENTATION, this.sizes[this.ind]);
+        })
+        
+        document.addEventListener('click', e =>{
+            if(e.target.classList[0] ==='grid-elem'){
+                let elems = document.querySelectorAll('.possible_ship');
+                if(elems.length>0)   this.ind+=1;
+                elems.forEach(elem => {
+                    elem.classList.add('ship-coord')
+                });
+
             }
         })
+
+        play_game.addEventListener('click', () =>{
+            if(this.ind<4)
+                window.alert('Please place 4 ships')
+            else{
+                const game = new gameScreen();
+                game.CreatePage();
+            }
+        })
+
+
+
 
 
         // const game = new gameScreen();
@@ -82,51 +108,46 @@ class UserPlaceShips {
     }
 
 
-    #preview(orientation, target_elem){
-        const START_ELEM = target_elem;
-        let size = 4
-        let [x,,y] = target_elem.getAttribute('coord')
-        let all_elems = [target_elem];
-        if(orientation ==='H' && x<=10-size){
-            target_elem.classList.add('possible_ship')
-            for(let i = 1;i<size;i++){
-                target_elem.nextSibling.classList.add('possible_ship')
-                target_elem = target_elem.nextSibling;
-                all_elems.push(target_elem);
+    Preview(src_element, orientation, size){
+        // console.log(src_element.id, orientation,size)
+        let[x,,y] = src_element.id;
+        x = parseInt(x);
+        y = parseInt(y);
+        if(orientation ==='H'){
+            if((x+size) <=10){
+                src_element.classList.add('possible_ship')
+                let i =1;
+                while(i<size){
+                    let elem = document.getElementById(`${x+i},${y}`);
+                    elem.classList.add('possible_ship')
+                    i++
+                }
             }
 
         }
-        else if(orientation ==='V' && y>=size-1){
-            target_elem.classList.add('possible_ship');
-            for(let i = 1; i<size; i++){
-                let elem = document.getElementById(`${x},${parseInt(y)-i}`);
-                elem.classList.add('possible_ship');
-                all_elems.push(elem)
+        else if(orientation ==='V'){
+            if(y>=size-1){
+                src_element.classList.add('possible_ship')
+                let i =1;
+                while(i<size){
+                    let elem = document.getElementById(`${x},${y-i}`);
+                    elem.classList.add('possible_ship')
+                    i++
+                }
             }
-
-
 
         }
-        START_ELEM.addEventListener('click', (event) =>{
-            if((orientation ==='H' && x<=10-size) || (orientation ==='V' && y>=size-1)){
-                all_elems.forEach(element => {
-                    element.classList.add('ship-coord')
-                });
-            }
+
+        src_element.addEventListener('mouseleave', () =>{
+            let elems = document.querySelectorAll('.possible_ship');
+            elems.forEach(elem => elem.classList.remove('possible_ship'))
         })
 
 
+       
+    }
 
 
-        START_ELEM.addEventListener('mouseleave', () =>{
-            all_elems.forEach(elem => {  
-                elem.classList.remove('possible_ship')
-            });
-            all_elems = [];
-        });
-
-
-       }
 
 
 
