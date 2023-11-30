@@ -15,58 +15,107 @@ class Gameboard{
         }
     };
 
-    placeShips = (coords = '0,0', orientations = 'V',size) =>{
+    placeShips = (coords = '0,0', orientations = 'V',size, is_player = false) =>{
         //if needed we can also make the ship object here and then get the coordinates for its placement using obj.taken_coords;
-        const requested_coords = [];
-        const coords_arr = coords.split(',');
-        const X_val = parseInt(coords_arr[0]);
-        const Y_val = parseInt(coords_arr[1]); 
-        if(orientations ==='H'){
-            requested_coords.push(`${X_val-1},${Y_val}`);
-            requested_coords.push(`${X_val+size},${Y_val}`)
-        }
-        else if(orientations ==='V'){
-            requested_coords.push(`${X_val},${Y_val-1}`);
-            requested_coords.push(`${X_val},${Y_val+size}`)
-        }
-        for(let i =0; i<size;i++){
-            if(orientations ==='H')
-            {   requested_coords.push(`${X_val+i},${Y_val}`)
-                requested_coords.push(`${X_val+i},${Y_val-1}`)
-                requested_coords.push(`${X_val+i},${Y_val+1}`)
+        if(is_player){
+            console.log('requested placement at: ', coords)
+            const requested_coords = [];
+            const coords_arr = coords.split(',');
+            const X_val = parseInt(coords_arr[0]);
+            const Y_val = parseInt(coords_arr[1]); 
+            
+            for(let i =0; i<size;i++){
+                if(orientations ==='H')
+                {   requested_coords.push(`${X_val+i},${Y_val}`)
+                    }
+                else    
+                {   requested_coords.push(`${X_val},${Y_val-i}`)           
                 }
-            else    
-            {   requested_coords.push(`${X_val},${Y_val+i}`)
-                requested_coords.push(`${X_val-1},${Y_val+i}`)
-                requested_coords.push(`${X_val+1},${Y_val+i}`)             
             }
+            
+            //This flag makes sure requested coordinates are available
+            //And provides proper spacing to make sure Ships are not crowded together
+            let flag = true
+            //Checks the requested coordinates
+            requested_coords.forEach(coord => {
+                if( this.Board.get(coord) instanceof Object)
+                    {       flag = false
+                    }
+            });
+    
+            //check the flag before creating ship
+            if(!flag)   return false;
+            
+            
+            //check expected coordinates to make sure the ships won't overlap
+            const new_ship = new Ship(size,`carrier ${size} ${orientations}`, coords,orientations);
+            const coordinates = new_ship.taken_coords;
+            coordinates.forEach(coord =>{
+                if(!(this.Board.get(coord) instanceof Object)){
+                    this.Board.set(coord, new_ship);
+                }
+                else return false;
+            });
+    
+            return true;
+    
+            
+
+        }
+        else{
+            const requested_coords = [];
+            const coords_arr = coords.split(',');
+            const X_val = parseInt(coords_arr[0]);
+            const Y_val = parseInt(coords_arr[1]); 
+            if(orientations ==='H'){
+                requested_coords.push(`${X_val-1},${Y_val}`);
+                requested_coords.push(`${X_val+size},${Y_val}`)
+            }
+            else if(orientations ==='V'){
+                requested_coords.push(`${X_val},${Y_val-1}`);
+                requested_coords.push(`${X_val},${Y_val+size}`)
+            }
+            for(let i =0; i<size;i++){
+                if(orientations ==='H')
+                {   requested_coords.push(`${X_val+i},${Y_val}`)
+                    requested_coords.push(`${X_val+i},${Y_val-1}`)
+                    requested_coords.push(`${X_val+i},${Y_val+1}`)
+                    }
+                else    
+                {   requested_coords.push(`${X_val},${Y_val+i}`)
+                    requested_coords.push(`${X_val-1},${Y_val+i}`)
+                    requested_coords.push(`${X_val+1},${Y_val+i}`)             
+                }
+            }
+            
+            //This flag makes sure requested coordinates are available
+            //And provides proper spacing to make sure Ships are not crowded together
+            let flag = true
+            //Checks the requested coordinates
+            requested_coords.forEach(coord => {
+                if( this.Board.get(coord) instanceof Object)
+                    {       flag = false
+                    }
+            });
+    
+            //check the flag before creating ship
+            if(!flag)   return false;
+            
+            
+            //check expected coordinates to make sure the ships won't overlap
+            const new_ship = new Ship(size,`carrier ${size} ${orientations}`, coords,orientations);
+            const coordinates = new_ship.taken_coords;
+            coordinates.forEach(coord =>{
+                if(!(this.Board.get(coord) instanceof Object)){
+                    this.Board.set(coord, new_ship);
+                }
+                else return false;
+            });
+    
+            return true;
+    
         }
         
-        //This flag makes sure requested coordinates are available
-        //And provides proper spacing to make sure Ships are not crowded together
-        let flag = true
-        //Checks the requested coordinates
-        requested_coords.forEach(coord => {
-            if( this.Board.get(coord) instanceof Object)
-                {       flag = false
-                }
-        });
-
-        //check the flag before creating ship
-        if(!flag)   return false;
-        
-        
-        //check expected coordinates to make sure the ships won't overlap
-        const new_ship = new Ship(size,`carrier ${size} ${orientations}`, coords,orientations);
-        const coordinates = new_ship.taken_coords;
-        coordinates.forEach(coord =>{
-            if(!(this.Board.get(coord) instanceof Object)){
-                this.Board.set(coord, new_ship);
-            }
-            else return false;
-        });
-
-        return true;
     }
 
     receiveAttack = (hit_coordinates_string, DOM_elem) =>{

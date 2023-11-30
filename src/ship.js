@@ -19,7 +19,7 @@ class Ship{
                 }
             }
             else if(direction ==='V'){
-                if(Y_val+i >= 0 && Y_val+i<10) this.taken_coords.push(`${X_val},${Y_val+i}`);
+                if(Y_val+i >= 0 && Y_val+i<10) this.taken_coords.push(`${X_val},${Y_val-i}`);
                 else {
                     this.taken_coords = [];
                     break;

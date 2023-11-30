@@ -5,14 +5,14 @@ const GameLoop = require('./gameloop')
 
 class gameScreen{
 
-    CreatePage(){
+    CreatePage(player_ship_placements){
         const main_container = document.querySelector('.game-container');
         const left_side = this.#CreateAndSetClassName('div', 'left-side')
         const right_side = this.#CreateAndSetClassName('div', 'right-side');
         main_container.style = '';                              //removes all the styling applied by the player_ships.js
         main_container.innerHTML = '';                          //removes elements from player_ships.js
         const gm_loop = new GameLoop();
-        gm_loop.gameLoop();
+        gm_loop.gameLoop(player_ship_placements);
 
         const pl_brd = gm_loop.PLAYER_BOARD.Board
         const comp_brd = gm_loop.COMPUTER_BOARD.Board;

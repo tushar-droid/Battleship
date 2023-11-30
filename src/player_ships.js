@@ -2,7 +2,7 @@ import './styles.css';
 const gameScreen = require('./index');
 
 class UserPlaceShips {
-    under_preview = [];
+    placements= [];
     sizes = [2,3,4,4];
     ind = 0;
     shipPlacementUI = () =>{
@@ -60,7 +60,10 @@ class UserPlaceShips {
         document.addEventListener('click', e =>{
             if(e.target.classList[0] ==='grid-elem'){
                 let elems = document.querySelectorAll('.possible_ship');
-                if(elems.length>0)   this.ind+=1;
+                if(elems.length>0){
+                    this.ind+=1;
+                    this.placements.push([e.target.id,CURRENT_ORIENTATION])
+                }   
                 elems.forEach(elem => {
                     elem.classList.add('ship-coord')
                 });
@@ -72,8 +75,9 @@ class UserPlaceShips {
             if(this.ind<4)
                 window.alert('Please place 4 ships')
             else{
+                
                 const game = new gameScreen();
-                game.CreatePage();
+                game.CreatePage(this.placements);
             }
         })
 
