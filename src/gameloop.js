@@ -86,9 +86,7 @@ class GameLoop{
                 if(chk){
                     i+=1;
                 } 
-                else{
-                    console.log('failed for ', coord_to_put, size_array[i])
-                }
+                
         }
             
 

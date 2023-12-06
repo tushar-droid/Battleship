@@ -62,7 +62,6 @@ class Gameboard{
 
         }
         else{
-            console.log(coords, orientations, size)
             const requested_coords = [];
             const coords_arr = coords.split(',');
             const X_val = parseInt(coords_arr[0]);
@@ -100,11 +99,9 @@ class Gameboard{
             //And provides proper spacing to make sure Ships are not crowded together
             let flag = true
             //Checks the requested coordinates
-            console.log(requested_coords)
             requested_coords.forEach(coord => {
                 if( this.Board.get(coord) instanceof Object)
                     {       flag = false
-                        console.log('failed due to overlap')
                         return
                     }
             });
