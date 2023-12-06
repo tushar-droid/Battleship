@@ -114,6 +114,8 @@ class UserPlaceShips {
 
     Preview(src_element, orientation, size){
         // console.log(src_element.id, orientation,size)
+        if(src_element.classList.contains('ship-coord'))
+            return;
         let[x,,y] = src_element.id;
         x = parseInt(x);
         y = parseInt(y);
@@ -123,6 +125,10 @@ class UserPlaceShips {
                 let i =1;
                 while(i<size){
                     let elem = document.getElementById(`${x+i},${y}`);
+                    if(elem.classList.contains('ship-coord')){
+                        this.#avoidOverlap();
+                        return
+                    }
                     elem.classList.add('possible_ship')
                     i++
                 }
@@ -135,6 +141,10 @@ class UserPlaceShips {
                 let i =1;
                 while(i<size){
                     let elem = document.getElementById(`${x},${y-i}`);
+                    if(elem.classList.contains('ship-coord')){
+                        this.#avoidOverlap();
+                        return
+                    }
                     elem.classList.add('possible_ship')
                     i++
                 }
@@ -151,7 +161,13 @@ class UserPlaceShips {
        
     }
 
-
+    #avoidOverlap(){
+        let overlap_elems = document.querySelectorAll('.possible_ship');
+        overlap_elems.forEach(element => {
+            element.classList.remove('possible_ship')
+        });
+        
+    }
 
 
 

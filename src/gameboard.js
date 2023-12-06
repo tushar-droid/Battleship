@@ -18,7 +18,6 @@ class Gameboard{
     placeShips = (coords = '0,0', orientations = 'V',size, is_player = false) =>{
         //if needed we can also make the ship object here and then get the coordinates for its placement using obj.taken_coords;
         if(is_player){
-            console.log('requested placement at: ', coords)
             const requested_coords = [];
             const coords_arr = coords.split(',');
             const X_val = parseInt(coords_arr[0]);
@@ -63,17 +62,26 @@ class Gameboard{
 
         }
         else{
+            console.log(coords, orientations, size)
             const requested_coords = [];
             const coords_arr = coords.split(',');
             const X_val = parseInt(coords_arr[0]);
             const Y_val = parseInt(coords_arr[1]); 
+            if(orientations ==='H' && X_val+size > 10){
+                return false
+            }
+            if(orientations ==='V' && Y_val-size < -1){
+                return false
+            }
             if(orientations ==='H'){
                 requested_coords.push(`${X_val-1},${Y_val}`);
                 requested_coords.push(`${X_val+size},${Y_val}`)
+
             }
             else if(orientations ==='V'){
-                requested_coords.push(`${X_val},${Y_val-1}`);
-                requested_coords.push(`${X_val},${Y_val+size}`)
+                requested_coords.push(`${X_val},${Y_val+1}`);
+                requested_coords.push(`${X_val},${Y_val-size}`)
+
             }
             for(let i =0; i<size;i++){
                 if(orientations ==='H')
@@ -82,9 +90,9 @@ class Gameboard{
                     requested_coords.push(`${X_val+i},${Y_val+1}`)
                     }
                 else    
-                {   requested_coords.push(`${X_val},${Y_val+i}`)
-                    requested_coords.push(`${X_val-1},${Y_val+i}`)
-                    requested_coords.push(`${X_val+1},${Y_val+i}`)             
+                {   requested_coords.push(`${X_val},${Y_val-i}`)
+                    requested_coords.push(`${X_val-1},${Y_val-i}`)
+                    requested_coords.push(`${X_val+1},${Y_val-i}`)             
                 }
             }
             
@@ -92,9 +100,12 @@ class Gameboard{
             //And provides proper spacing to make sure Ships are not crowded together
             let flag = true
             //Checks the requested coordinates
+            console.log(requested_coords)
             requested_coords.forEach(coord => {
                 if( this.Board.get(coord) instanceof Object)
                     {       flag = false
+                        console.log('failed due to overlap')
+                        return
                     }
             });
     

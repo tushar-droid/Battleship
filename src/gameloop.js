@@ -11,7 +11,6 @@ class GameLoop{
         this.placeShipsLoop(this.PLAYER_BOARD,player_ship_placements)
         this.placeShipsLoop(this.COMPUTER_BOARD)  
         //playGame(PLAYER_ONE, COMP_PLAYER, PLAYER_BOARD, COMPUTER_BOARD);
-        console.log('This is the player board: ', this.PLAYER_BOARD.Board)
     }
 
     playGame = () =>{
@@ -54,7 +53,6 @@ class GameLoop{
     }
 
     placeShipsLoop = (board_to_set, pl_selection = []) =>{
-        console.log(pl_selection);
         if(pl_selection.length > 0){
             let size_array = [2,3,4,4];
             let i = 0;
@@ -85,7 +83,12 @@ class GameLoop{
                 var coord_to_put = Math.floor(Math.random() * possible_places.length);
                 coord_to_put = possible_places.splice(coord_to_put, 1);
                 const chk =board_to_set.placeShips(String(coord_to_put),Math.random() < 0.5 ? 'H' : 'V', size_array[i] );
-                if(chk) i+=1;
+                if(chk){
+                    i+=1;
+                } 
+                else{
+                    console.log('failed for ', coord_to_put, size_array[i])
+                }
         }
             
 
