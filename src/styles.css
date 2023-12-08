@@ -1,230 +1,225 @@
 @font-face {
-    font-family: 'Anton';
-    src: url('../src/assets/Anton-Regular.ttf') ;
+  font-family: "Anton";
+  src: url("../src/assets/Anton-Regular.ttf");
 }
 
-
-
-:root{
-    --backdrop: #001d3d;
-    --backgrnd:#003566;
-    --txt: #ffd60a;
-    --hit: 	#ff220c;
+:root {
+  --backdrop: #001d3d;
+  --backgrnd: #003566;
+  --txt: #ffd60a;
+  --hit: #ff220c;
 }
 
-
-body{
-    background-color: var(--backdrop);
-    margin:0;
-    padding: 0;
-    height: 100vh;
-    width:100vw;
-    color: var(--txt);
-    font-family: 'Anton';
-    display: flex;
-    align-items: center;
-    justify-content: center;
+body {
+  background-color: var(--backdrop);
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  color: var(--txt);
+  font-family: "Anton";
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.game-container{
-    height: 80%;
-    width: 60%;
-    display: flex;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    background-color: var(--backgrnd);
+.game-container {
+  height: 80%;
+  width: 60%;
+  display: flex;
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-color: var(--backgrnd);
 }
 
-.game-container > div{
-    flex:1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: large;
+.game-container > div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
 }
 
-.placeships-heading{
-    font-weight: normal;
-
+.placeships-heading {
+  font-weight: normal;
 }
 
-.comp-side{
-    padding: 1%;
-    background-color: var(--backdrop);
-    height: 70%;
-    width: 80%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}   
-.player-side{
-    padding: 1%;
-    display: flex;
-    height: 70%;
-    width: 80%;
-    background-color: var(--backdrop);
-    align-items: center;
-    flex-direction: column;
-    gap:2%;
-
+.comp-side {
+  padding: 1%;
+  background-color: var(--backdrop);
+  height: 70%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.player-side {
+  padding: 1%;
+  display: flex;
+  height: 70%;
+  width: 80%;
+  background-color: var(--backdrop);
+  align-items: center;
+  flex-direction: column;
+  gap: 2%;
 }
 
-
-.grid-elem{
-    background-color: var(--backgrnd);
-    border-radius: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+.grid-elem {
+  background-color: var(--backgrnd);
+  border-radius: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-
-.comp-grid > .grid-elem:hover{
-    background-color: yellowgreen;
-    transform: scale(1.10);
-
+.comp-grid > .grid-elem:hover {
+  background-color: yellowgreen;
+  transform: scale(1.1);
 }
 
-.player-grid, .comp-grid, .ships-grid{
-    padding-top: 4%;
-    height: 80%;
-    width: 80%;
-    display: grid;
-    grid-template-columns: repeat(10,1fr);
-    grid-template-rows: repeat(10,1fr);
-    gap:1%;
+.player-grid,
+.comp-grid,
+.ships-grid {
+  padding-top: 4%;
+  height: 80%;
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 1%;
 }
 
-.ship-coord{
-
-    background-color: grey !important;
+.ship-coord {
+  background-color: grey !important;
 }
 
-
-.missed{
-    background-color: var(--txt);
+.missed {
+  background-color: var(--txt);
 }
 
-.hit{
-    background-color: var(--hit) !important;
+.hit {
+  background-color: var(--hit) !important;
 }
-.set-ships{
-    display: flex;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
+.set-ships {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
-.set-ships > *{
-    flex:1;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.set-ships > * {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.ships-grid  > .grid-elem{
-    background-color: var(--backdrop);
-    border-radius: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+.ships-grid > .grid-elem {
+  background-color: var(--backdrop);
+  border-radius: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 /* This is for the slider taken from  https://uiverse.io/YaroslavFilipenko/red-turtle-90 */
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 20px;
-  }
-  
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #b1b9c3;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: '';
-    height: 30px;
-    width: 30px;
-    bottom: -5px;
-    background: var(--backdrop);
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-  
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
-  
-  input:checked+.slider {
-    background-color: #b1b9c3;
-  }
-  
-  input:checked+.slider:before {
-    -webkit-transform: translateX(35px);
-    -ms-transform: translateX(35px);
-    transform: translateX(35px);
-    background: var(--txt);
-  }
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #b1b9c3;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 30px;
+  width: 30px;
+  bottom: -5px;
+  background: var(--backdrop);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #b1b9c3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(35px);
+  -ms-transform: translateX(35px);
+  transform: translateX(35px);
+  background: var(--txt);
+}
 /* Swtich ends here */
 
-.switcher{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width:100%;
+.switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
-
-
-.possible_ship{
-    opacity: 0.5;
+.possible_ship {
+  opacity: 0.5;
 }
 
-.right-side{
-    display: flex;
-    flex-direction: column;
-    gap:20%;
+.right-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20%;
 }
-.instructions{
-    text-align: center;
-    font-weight: normal;
-}
-
-
-.start-game, .replay-btn{
-    background-color: var(--txt);
-    color: var(--backdrop);
-    font-family: 'Anton';
-    font-size: xx-large;
-    margin-bottom: 2%;
-    border: none;
-    padding: 0% 1%;
-    transition: all 0.3s ease;
+.instructions {
+  text-align: center;
+  font-weight: normal;
 }
 
-.start-game:hover, .replay-btn:hover{
-    background-color: var(--backdrop);
-    color: var(--txt);
+.start-game,
+.replay-btn {
+  background-color: var(--txt);
+  color: var(--backdrop);
+  font-family: "Anton";
+  font-size: xx-large;
+  margin-bottom: 2%;
+  border: none;
+  padding: 0% 1%;
+  transition: all 0.3s ease;
 }
 
+.start-game:hover,
+.replay-btn:hover {
+  background-color: var(--backdrop);
+  color: var(--txt);
+}
