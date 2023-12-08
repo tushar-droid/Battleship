@@ -6,12 +6,13 @@ class UserPlaceShips {
     sizes = [2,3,4,4];
     ind = 0;
     shipPlacementUI = () =>{
-        const game_container = document.querySelector('.game-container'); 
+        let game_container = document.querySelector('.game-container'); 
+        game_container.innerHTML = '';
         game_container.style = 'flex-direction:column; align-items:center;'
         let CURRENT_ORIENTATION = 'H'
 
         const main_container = this.#CreateAndSetClassName('div', 'set-ships');
-        const heading = this.#CreateAndSetClassName('h2', 'placeships-heading')
+        const heading = this.#CreateAndSetClassName('h1', 'placeships-heading')
         const empty_grid_container = this.#CreateAndSetClassName('div', 'empty-grid-container');
         const right_side = this.#CreateAndSetClassName('div', 'right-side');
         const grid = this.#CreateAndSetClassName('div', 'ships-grid')
@@ -38,7 +39,7 @@ class UserPlaceShips {
         this.#createGrid(grid)
         heading.textContent = 'PLACE YOUR SHIPS';
         empty_grid_container.appendChild(grid)
-        const instructions = document.createElement('p');
+        const instructions = document.createElement('h3');
         instructions.classList.add('instructions');
         instructions.textContent = 'YOU HAVE A TOTAL OF 4 SHIPS OF SIZE 2,3,4,4 PLACE YOUR SHIPS STRATEGICALLY I MIGHT BE GOOD AT THIS LOGIC';
         right_side.appendChild(instructions)
@@ -69,6 +70,9 @@ class UserPlaceShips {
                 });
 
             }
+            else if(e.target.classList[0] ==='replay-btn') {
+                const new_game = new UserPlaceShips();
+                new_game.shipPlacementUI();}
         })
 
         play_game.addEventListener('click', () =>{
@@ -84,9 +88,6 @@ class UserPlaceShips {
 
 
 
-
-        // const game = new gameScreen();
-        // game.CreatePage();
 
     }
 

@@ -26,8 +26,10 @@ class GameLoop{
                     return
                     //window.alert('CONGRATULATIONS YOU WON!!!!!')
                 }
-                if(this.COMP_PLAYER.computerTurn(this.PLAYER_BOARD))
-                    window.alert('WELL PLAYED BUT COMPUTER WON!!!!!');
+                if(this.COMP_PLAYER.computerTurn(this.PLAYER_BOARD)){
+                    GameOver('WELL PLAYED BUT COMPUTER WON!!!!!')
+                    return
+                }
             }
         })
 

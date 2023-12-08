@@ -37,6 +37,7 @@ class gameScreen{
         
         const comp_side = this.#CreateAndSetClassName('div', 'comp-side')
         const comp_title = this.#CreateAndSetClassName('div', 'h3');
+        comp_title.style = 'font-size:x-large;'
         comp_title.textContent = 'COMPUTER SIDE';
         const grid_container = this.#CreateAndSetClassName('div', 'comp-grid');
         this.#createGrid(grid_container, comp_brd, false);
@@ -50,6 +51,7 @@ class gameScreen{
     #PlayerSideUI(pl_brd){
         const player_side = this.#CreateAndSetClassName('div', 'player-side')
         const player_title = this.#CreateAndSetClassName('div', 'h3');
+        player_title.style = 'font-size:x-large;'
         player_title.textContent = 'PLAYER SIDE';
 
         const grid_container = this.#CreateAndSetClassName('div', 'player-grid');
@@ -64,7 +66,7 @@ class gameScreen{
                 const grid_elem = this.#CreateAndSetClassName('div','grid-elem' ,isPlayer?`P${j},${i}`:`C${j},${i}`,`${j},${i}`);
                 if(brd.get(`${j},${i}`) instanceof Object && isPlayer )          //REMEMBER TO UNCOMMENT THIS  
                 {   grid_elem.classList.add('ship-coord');
-                    grid_elem.textContent = 'S';
+                    
                     }
                 // else
                 //     grid_elem.textContent = brd.get(`${i},${j}`);
